@@ -4,7 +4,7 @@
 
 I selected ZIP Code 70113 as the main geographic region because it had the highest average Yelp rating among ZIP Code areas containing at least 10 selected restaurants. ZIP Code 70113 contained 16 Cajun/Creole, seafood, or soul food restaurants, with an average business rating of 4.19 stars and a median rating of 4 stars.
 
-The CSV table shows the comparison of all ZIP Code areas with at least 10 selected restaurants. ZIP Code 70113 ranked first by average business rating. Requiring at least 10 restaurants makes the comparison more reliable than choosing a ZIP Code based on only one or two businesses.
+The table shows the comparison of all ZIP Code areas with at least 10 selected restaurants. ZIP Code 70113 ranked first by average business rating. Requiring at least 10 restaurants makes the comparison more reliable than choosing a ZIP Code based on only one or two businesses.
 
 ### Top 10 ZIP Code Areas by Average Rating
 This table includes the ten highest-rated ZIP Code areas, but some areas contain very few restaurants. Therefore, these averages may be less reliable. The main analysis uses ZIP Code areas with at least 10 restaurants.
@@ -22,7 +22,7 @@ This table includes the ten highest-rated ZIP Code areas, but some areas contain
 |70123 |                     5|                   4.00|                  4.00|
 |70131 |                     5|                   4.00|                  4.00|
 
-### Top 10 ZIP Code areas
+### Top 10 ZIP Code areas with at least 10 restaurants
 
 |zcta  | number_of_restaurants| average_business_stars| median_business_stars|
 |:-----|---------------------:|----------------------:|---------------------:|
