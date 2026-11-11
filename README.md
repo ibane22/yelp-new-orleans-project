@@ -6,9 +6,42 @@ I selected ZIP Code 70113 as the main geographic region because it had the highe
 
 The CSV table shows the comparison of all ZIP Code areas with at least 10 selected restaurants. ZIP Code 70113 ranked first by average business rating. Requiring at least 10 restaurants makes the comparison more reliable than choosing a ZIP Code based on only one or two businesses.
 
-The complete comparison table is available here:
+### Top 10 ZIP Code Areas by Average Rating
+This table includes the ten highest-rated ZIP Code areas, but some areas contain very few restaurants. Therefore, these averages may be less reliable. The main analysis uses ZIP Code areas with at least 10 restaurants.
 
-[zcta_restaurant_comparison.csv](data/new_orleans/zcta_restaurant_comparison.csv)
+|zcta  | number_of_restaurants| average_business_stars| median_business_stars|
+|:-----|---------------------:|----------------------:|---------------------:|
+|70129 |                     2|                   4.25|                  4.25|
+|70113 |                    16|                   4.19|                  4.00|
+|70117 |                    26|                   4.12|                  4.00|
+|70125 |                     6|                   4.08|                  4.00|
+|70122 |                    13|                   4.04|                  4.00|
+|70001 |                     1|                   4.00|                  4.00|
+|70114 |                     9|                   4.00|                  4.00|
+|70121 |                     5|                   4.00|                  4.00|
+|70123 |                     5|                   4.00|                  4.00|
+|70131 |                     5|                   4.00|                  4.00|
+
+### Top 10 ZIP Code areas
+
+|zcta  | number_of_restaurants| average_business_stars| median_business_stars|
+|:-----|---------------------:|----------------------:|---------------------:|
+|70113 |                    16|                   4.19|                  4.00|
+|70117 |                    26|                   4.12|                  4.00|
+|70122 |                    13|                   4.04|                  4.00|
+|70118 |                    27|                   3.96|                  4.00|
+|70115 |                    56|                   3.92|                  4.00|
+|70119 |                    53|                   3.90|                  4.00|
+|70116 |                    76|                   3.84|                  4.00|
+|70127 |                    12|                   3.79|                  4.00|
+|70112 |                    62|                   3.73|                  3.50|
+|70124 |                    16|                   3.69|                  3.75|
+
+### Map of the selected region
+
+The overview map shows where ZIP Code 70113 is located within New Orleans. Because the selected ZIP Code is relatively small, I also created a close-up map. The close-up makes the selected boundary and the 16 restaurants easier to see.
+
+![Close-up map of ZIP Code 70113](figures/zip_70113_close_map.png)
 
 ![Map highlighting ZIP Code 70113](figures/zip_70113_map.png)
 

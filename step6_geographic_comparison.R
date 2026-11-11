@@ -408,3 +408,90 @@ ggsave(
   height = 6,
   dpi = 300
 )
+
+# Select ZIP Code 70113
+selected_zcta <- zcta_map_boundaries %>%
+  filter(selected_area)
+
+# Select restaurants located inside ZIP Code 70113
+restaurants_70113 <- zcta_restaurants %>%
+  filter(zcta == "70113")
+
+# Get the boundaries of ZIP Code 70113
+selected_bbox <- st_bbox(selected_zcta)
+
+# Add a small amount of space around the selected ZIP Code
+x_limits <- c(
+  selected_bbox["xmin"] - 0.01,
+  selected_bbox["xmax"] + 0.01
+)
+
+y_limits <- c(
+  selected_bbox["ymin"] - 0.01,
+  selected_bbox["ymax"] + 0.01
+)
+
+# Create a close-up map
+zcta_70113_close_map <- ggplot() +
+  
+  # Other ZIP Code boundaries shown only as outlines
+  geom_sf(
+    data = zcta_map_boundaries,
+    fill = NA,
+    color = "grey75",
+    linewidth = 0.4
+  ) +
+  
+  # Highlight ZIP Code 70113
+  geom_sf(
+    data = selected_zcta,
+    fill = "gold",
+    color = "black",
+    alpha = 0.45,
+    linewidth = 1.5
+  ) +
+  
+  # Restaurants inside ZIP Code 70113
+  geom_sf(
+    data = restaurants_70113,
+    aes(color = stars),
+    size = 3,
+    alpha = 0.9
+  ) +
+  
+  scale_color_viridis_c(
+    option = "C",
+    limits = c(1, 5),
+    name = "Business\nstars"
+  ) +
+  
+  coord_sf(
+    xlim = x_limits,
+    ylim = y_limits,
+    expand = FALSE
+  ) +
+  
+  labs(
+    title = "Close-Up of ZIP Code 70113",
+    subtitle = "16 selected Cajun/Creole, seafood, and soul food restaurants",
+    caption = "Gold area represents ZIP Code 70113."
+  ) +
+  
+  theme_minimal() +
+  
+  theme(
+    plot.title = element_text(face = "bold"),
+    legend.position = "right"
+  )
+
+# Display the close-up map
+zcta_70113_close_map
+
+# Save the close-up map
+ggsave(
+  "figures/zip_70113_close_map.png",
+  plot = zcta_70113_close_map,
+  width = 8,
+  height = 6,
+  dpi = 300
+)
