@@ -261,3 +261,150 @@ ggsave(
   height = 6,
   dpi = 300
 )
+
+# Analyze selected restaurants by ZIP Code Tabulation Area
+
+zcta_restaurants <- restaurant_points %>%
+  st_join(
+    zcta_boundaries %>%
+      select(
+        zcta = all_of(zcta_id_column)
+      ),
+    join = st_within,
+    left = TRUE
+  )
+
+# Calculate restaurant statistics for each ZIP Code area
+restaurants_by_zcta <- zcta_restaurants %>%
+  st_drop_geometry() %>%
+  filter(!is.na(zcta)) %>%
+  group_by(zcta) %>%
+  summarise(
+    number_of_restaurants = n_distinct(business_id),
+    average_business_stars = mean(stars, na.rm = TRUE),
+    median_business_stars = median(stars, na.rm = TRUE),
+    total_reviews = sum(review_count, na.rm = TRUE),
+    average_reviews_per_restaurant = mean(review_count, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(average_business_stars))
+
+# Display every ZIP Code area
+print(restaurants_by_zcta, n = Inf)
+
+# Display ZIP Code areas with at least 10 restaurants
+reliable_zcta_areas <- restaurants_by_zcta %>%
+  filter(number_of_restaurants >= 10) %>%
+  arrange(
+    desc(average_business_stars),
+    desc(number_of_restaurants)
+  )
+
+print(reliable_zcta_areas, n = Inf)
+
+# Save the table
+write.csv(
+  restaurants_by_zcta,
+  "data/new_orleans/restaurants_by_zcta.csv",
+  row.names = FALSE
+)
+
+write.csv(
+  reliable_zcta_areas,
+  "data/new_orleans/reliable_zcta_areas.csv",
+  row.names = FALSE
+)
+
+# Create a table for the selected region
+
+selected_region_table <- reliable_zcta_areas %>%
+  filter(zcta == "70113")
+
+selected_region_table
+
+# Prepare ZIP Code boundaries for the map
+
+zcta_map_boundaries <- zcta_boundaries %>%
+  mutate(
+    selected_area = as.character(.data[[zcta_id_column]]) == "70113"
+  )
+
+# Create the map highlighting ZIP Code 70113
+
+zcta_70113_map <- ggplot() +
+  
+  # Draw all ZIP Code boundaries
+  geom_sf(
+    data = zcta_map_boundaries,
+    aes(fill = selected_area),
+    color = "grey45",
+    linewidth = 0.4
+  ) +
+  
+  # Highlight ZIP Code 70113 with a stronger outline
+  geom_sf(
+    data = zcta_map_boundaries %>%
+      filter(selected_area),
+    fill = "gold",
+    color = "black",
+    alpha = 0.35,
+    linewidth = 1.2
+  ) +
+  
+  # Draw the restaurant locations
+  geom_sf(
+    data = zcta_restaurants %>%
+      filter(!is.na(zcta)),
+    aes(color = stars),
+    size = 2,
+    alpha = 0.8
+  ) +
+  
+  scale_fill_manual(
+    values = c(
+      "FALSE" = "grey92",
+      "TRUE" = "gold"
+    ),
+    labels = c(
+      "FALSE" = "Other ZIP Code areas",
+      "TRUE" = "ZIP Code 70113"
+    ),
+    name = "Geographic area"
+  ) +
+  
+  scale_color_viridis_c(
+    option = "C",
+    limits = c(1, 5),
+    name = "Business\nstars"
+  ) +
+  
+  coord_sf(
+    xlim = c(-90.25, -89.75),
+    ylim = c(29.85, 30.20),
+    expand = FALSE
+  ) +
+  
+  labs(
+    title = "ZIP Code 70113: Highest-Rated Specialty Restaurant Area",
+    subtitle = "16 selected restaurants; average rating = 4.19",
+    caption = "Selected restaurants are shown by Yelp business rating."
+  ) +
+  
+  theme_minimal() +
+  
+  theme(
+    plot.title = element_text(face = "bold"),
+    legend.position = "right"
+  )
+
+# Display the map
+zcta_70113_map
+
+# Save the map
+ggsave(
+  "figures/zip_70113_map.png",
+  plot = zcta_70113_map,
+  width = 8,
+  height = 6,
+  dpi = 300
+)

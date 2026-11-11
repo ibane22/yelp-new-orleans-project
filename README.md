@@ -1,5 +1,17 @@
 # yelp-new-orleans-project
 
+## Selected geographic region
+
+I selected ZIP Code 70113 as the main geographic region because it had the highest average Yelp rating among ZIP Code areas containing at least 10 selected restaurants. ZIP Code 70113 contained 16 Cajun/Creole, seafood, or soul food restaurants, with an average business rating of 4.19 stars and a median rating of 4 stars.
+
+The CSV table shows the comparison of all ZIP Code areas with at least 10 selected restaurants. ZIP Code 70113 ranked first by average business rating. Requiring at least 10 restaurants makes the comparison more reliable than choosing a ZIP Code based on only one or two businesses.
+
+The complete comparison table is available here:
+
+[zcta_restaurant_comparison.csv](data/new_orleans/zcta_restaurant_comparison.csv)
+
+![Map highlighting ZIP Code 70113](figures/zip_70113_map.png)
+
 ## Step 6: Geographic comparison
 
 ### Selected geographic system
