@@ -1,3 +1,5 @@
+# Step 5: Add official geographic boundaries
+
 library(sf)
 library(tigris)
 library(ggplot2)
@@ -6,10 +8,13 @@ library(dplyr)
 # Save downloaded Census files for future use
 options(tigris_use_cache = TRUE)
 
-# Load the New Orleans restaurant data
+# Load only the selected restaurants marked as open
 new_orleans_restaurants <- readRDS(
-  "data/new_orleans/new_orleans_restaurants.rds"
+  "data/new_orleans/selected_restaurants.rds"
 )
+
+# Confirm the number of restaurants
+nrow(new_orleans_restaurants)
 
 # Download official Louisiana city boundaries
 louisiana_places <- tigris::places(
@@ -31,11 +36,11 @@ restaurant_points <- new_orleans_restaurants %>%
     remove = FALSE
   )
 
-# Make the boundary layer use the same CRS as the restaurant points
+# Make boundary CRS match restaurant CRS
 louisiana_places <- louisiana_places %>%
   st_transform(st_crs(restaurant_points))
 
-# Spatially assign each restaurant to an official place boundary
+# Assign restaurants to official place boundaries
 restaurants_with_place <- restaurant_points %>%
   st_join(
     louisiana_places %>%
@@ -47,7 +52,7 @@ restaurants_with_place <- restaurant_points %>%
     left = TRUE
   )
 
-# Compare Yelp's city label with the official Census place name
+# Compare Yelp city labels with Census place names
 city_comparison <- restaurants_with_place %>%
   st_drop_geometry() %>%
   count(city, place_name, sort = TRUE)
@@ -58,7 +63,7 @@ city_comparison
 new_orleans_boundary <- louisiana_places %>%
   filter(NAME == "New Orleans")
 
-# Keep restaurants assigned to the official New Orleans boundary
+# Keep restaurants assigned to New Orleans
 new_orleans_map_data <- restaurants_with_place %>%
   filter(place_name == "New Orleans")
 
@@ -70,7 +75,7 @@ orleans_roads <- tigris::roads(
   class = "sf"
 )
 
-# Download rivers and streams for Orleans Parish
+# Download rivers and streams
 orleans_rivers <- tigris::linear_water(
   state = "LA",
   county = "Orleans",
@@ -78,7 +83,7 @@ orleans_rivers <- tigris::linear_water(
   class = "sf"
 )
 
-# Download larger water areas for Orleans Parish
+# Download larger water areas
 orleans_water <- tigris::area_water(
   state = "LA",
   county = "Orleans",
@@ -86,7 +91,7 @@ orleans_water <- tigris::area_water(
   class = "sf"
 )
 
-# Convert roads and water layers to the restaurant CRS
+# Match all map layers to the restaurant CRS
 orleans_roads <- orleans_roads %>%
   st_transform(st_crs(restaurant_points))
 
@@ -97,7 +102,7 @@ orleans_water <- orleans_water %>%
   st_transform(st_crs(restaurant_points))
 
 # Create the map
-ggplot() +
+open_restaurants_map <- ggplot() +
   
   # Official New Orleans boundary
   geom_sf(
@@ -130,7 +135,7 @@ ggplot() +
     alpha = 0.5
   ) +
   
-  # Restaurant locations
+  # Open restaurant locations
   geom_sf(
     data = new_orleans_map_data,
     aes(color = stars),
@@ -140,15 +145,31 @@ ggplot() +
   
   scale_color_viridis_c(
     option = "C",
-    limits = c(1, 5)
+    limits = c(1, 5),
+    name = "Business\nstars"
   ) +
   
   labs(
-    title = "Yelp Restaurants, Roads, and Waterways in New Orleans",
-    color = "Business\nstars"
+    title = "Open Specialty Restaurants in New Orleans",
+    subtitle = "Cajun/Creole, seafood, and soul food restaurants",
+    caption = "Only restaurants marked open in the Yelp data are shown."
   ) +
   
   theme_minimal()
+
+# Display the map
+open_restaurants_map
+
+# Save the map
+dir.create("figures", showWarnings = FALSE)
+
+ggsave(
+  "figures/open_restaurants_map.png",
+  plot = open_restaurants_map,
+  width = 8,
+  height = 6,
+  dpi = 300
+)
 
 # Save the spatially joined data
 saveRDS(

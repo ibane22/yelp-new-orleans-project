@@ -11,9 +11,11 @@ restaurants_with_place <- readRDS(
   "data/new_orleans/restaurants_with_place.rds"
 )
 
-# Keep restaurants serving New Orleans-associated cuisines
+# Keep only open restaurants serving the selected cuisines
 selected_restaurant_data <- restaurants_with_place %>%
   filter(
+    !is.na(is_open),
+    is_open == 1,
     !is.na(categories),
     str_detect(
       categories,

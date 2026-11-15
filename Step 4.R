@@ -1,12 +1,19 @@
+# Step 4: Join open restaurants to reviews
+
 library(dplyr)
 library(tidyr)
 library(stringr)
 
-# Load the New Orleans restaurant and review RDS files
+# Load New Orleans restaurants and keep only businesses marked open
 restaurants <- readRDS(
   "data/new_orleans/new_orleans_restaurants.rds"
-)
+) %>%
+  filter(
+    !is.na(is_open),
+    is_open == 1
+  )
 
+# Load New Orleans reviews
 reviews <- readRDS(
   "data/new_orleans/new_orleans_reviews.rds"
 )
@@ -18,7 +25,10 @@ category_data <- restaurants %>%
   mutate(
     category = str_to_title(str_squish(categories))
   ) %>%
-  filter(!is.na(category), category != "") %>%
+  filter(
+    !is.na(category),
+    category != ""
+  ) %>%
   distinct(business_id, category)
 
 # Select the three restaurant categories
@@ -33,7 +43,7 @@ selected_business_ids <- category_data %>%
   filter(category %in% selected_categories) %>%
   distinct(business_id)
 
-# Keep the selected restaurant business information
+# Keep selected open restaurant information
 selected_restaurant_data <- restaurants %>%
   semi_join(
     selected_business_ids,
@@ -50,7 +60,8 @@ selected_restaurant_data <- restaurants %>%
     longitude,
     stars,
     review_count,
-    categories
+    categories,
+    is_open
   )
 
 # Filter reviews before joining
@@ -76,14 +87,17 @@ dim(restaurant_reviews)
 n_distinct(restaurant_reviews$business_id)
 head(restaurant_reviews)
 
-# Save the selected restaurant business data
+# Confirm that all selected restaurants are open
+table(selected_restaurant_data$is_open)
+
+# Save selected open restaurant data
 saveRDS(
   selected_restaurant_data,
   "data/new_orleans/selected_restaurants.rds",
   compress = "xz"
 )
 
-# Save the joined data
+# Save the joined restaurant-review data
 saveRDS(
   restaurant_reviews,
   "data/new_orleans/selected_restaurant_reviews.rds",
