@@ -1,0 +1,11 @@
+"business_id","business_name","city","postal_code","latitude","longitude","number_of_reviews_all_reviewers","average_stars_all_reviewers","median_stars_all_reviewers","number_of_eligible_reviews","number_of_eligible_reviewers","average_stars_eligible_reviewers","average_normalized_score","median_normalized_score"
+"sbp-DjxxPbWmCHuQvwzbNA","Sorella5","New Orleans","70113",29.9484438,-90.0731985,49,4.95918367346939,5,3,3,4.33333333333333,0.593915343915344,0.75
+"JIMo4CQNZiLYa8Tak4EFiA","La Vie En Rose Cafe","New Orleans","70113",29.9398338,-90.0797510846,11,4.90909090909091,5,7,7,4.85714285714286,0.694451022321728,0.666666666666667
+"OSyRjc5SLixdhnvpsqg5MA","3 Southern Girls","New Orleans","70121",29.9592843,-90.1719775,21,4.9047619047619,5,4,4,4.75,0.914732142857143,1.06696428571429
+"FCcFpitB7F3qxd1bD4Epfg","Iacovone Kitchen","New Orleans","70115",29.9350508,-90.1089541,40,4.85,5,7,6,4.57142857142857,0.452640117138319,0.578947368421052
+"rbPK4jSyFS10zhWYvo_Srg","Cafe Porche and snowbar","New Orleans","70113",29.9393162215,-90.0789387705,176,4.82954545454545,5,7,6,4.57142857142857,0.601287601287601,0.555555555555555
+"zOydduvvtd7MgykEMfZx3A","Danny Seafood","New Orleans","70116",29.9747816,-90.0671404,11,4.81818181818182,5,NA,NA,NA,NA,NA
+"NRfPp3teG31PgEJuIipbSw","P & J Oyster Co.","New Orleans","70112",29.959604,-90.0688179,10,4.8,5,3,3,4.66666666666667,1.09396578782172,1.22916666666667
+"9qdUEbbjzjcpPbXKeRN4zw","Nonno’s Cajun Cuisine and Pastries","New Orleans","70116",29.9736112,-90.0589405,25,4.76,5,3,3,4.66666666666667,0.769230769230769,0.5
+"cIzp7QZOaUyRLl3ZcwsrHw","Addis Nola","New Orleans","70119",29.9621191,-90.0899073,156,4.75,5,34,32,4.73529411764706,0.376030933589954,0.444444444444445
+"WO-ofNAvSuJpdRt9Auon6w","Heard Dat Kitchen","New Orleans","70113",29.94386,-90.0863251,579,4.73920552677029,5,61,56,4.52459016393443,0.445728435504295,0.5

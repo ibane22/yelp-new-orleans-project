@@ -1,0 +1,11 @@
+"business_id","business_name","city","postal_code","number_of_reviews_all_reviewers","average_stars_all_reviewers","median_stars_all_reviewers","number_of_reviews_eligible_reviewers","average_stars_eligible_reviewers","average_normalized_score","median_normalized_score"
+"I2KVtG_moKx3RoUfSNgWPw","Fam Bizz","New Orleans","70125",29,4.55172413793103,5,8,4.875,0.834317615935263,0.795767195767196
+"aV8lLV-o6g53R-HUTmykpw","MKM Creations","New Orleans","70115",16,4.625,5,6,4.66666666666667,0.752525252525252,0.883333333333333
+"rbPK4jSyFS10zhWYvo_Srg","Cafe Porche and snowbar","New Orleans","70113",176,4.82954545454545,5,12,4.66666666666667,0.709084434084434,0.8
+"JIMo4CQNZiLYa8Tak4EFiA","La Vie En Rose Cafe","New Orleans","70113",11,4.90909090909091,5,7,4.85714285714286,0.694451022321728,0.666666666666667
+"zD4zXTjTaUKtD3J_Zp8mWw","Langlois","New Orleans","70116",59,4.72881355932203,5,9,4.44444444444444,0.623442265795207,0.833333333333333
+"YIWBvaCSeIKLcXAQWkvz9w","Bonafried","New Orleans","70115",31,4.54838709677419,5,17,4.58823529411765,0.602101870612101,0.826086956521739
+"FCcFpitB7F3qxd1bD4Epfg","Iacovone Kitchen","New Orleans","70115",40,4.85,5,10,4.7,0.58351474866349,0.70375939849624
+"w5gg-e5tYb09iUXZdZgZ-Q","Orchid Seafood","New Orleans","70119",33,4.48484848484848,5,15,4.8,0.579255936978897,0.6
+"TUTQeLjq1UbkR5r8mOvMqw","Tito's Ceviche & Pisco","New Orleans","70115",221,4.71945701357466,5,84,4.77380952380952,0.578809371625541,0.575187969924812
+"z990Udv6oRgM9g0Ef9sQ7w","Ms Linda Green ""Yakamein Lady""","New Orleans","70119",28,4.5,5,15,4.33333333333333,0.57580937465597,0.636363636363636
